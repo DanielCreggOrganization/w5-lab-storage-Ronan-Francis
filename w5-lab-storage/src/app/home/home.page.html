@@ -5,6 +5,7 @@
 </ion-header>
 
 <ion-content class="ion-padding">
+  <button (click)="goToMovies()">Go to Movies</button>
   <ion-item>
     <ion-label position="floating">Key</ion-label>
     <ion-input [(ngModel)]="key"></ion-input>
@@ -15,5 +16,12 @@
   </ion-item>
   <ion-button expand="full" (click)="setItem()">Set Item</ion-button>
   <ion-button expand="full" (click)="getItem()">Get Item</ion-button>
+  <ion-button expand="full" (click)="removeItem()">Remove Item</ion-button>
+  <ion-button expand="full" (click)="clearStorage()">Clear Storage</ion-button>
   <p>{{ output }}</p>
+  <ion-list>
+    <ion-item *ngFor="let item of storedItems">
+      <ion-label>{{ item.key }}: {{ item.value }}</ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>

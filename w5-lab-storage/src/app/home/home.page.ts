@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { StorageService } from '../services/storage.service';
 
 @Component({
@@ -8,14 +10,19 @@ import { StorageService } from '../services/storage.service';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   standalone: true,
-  imports: [IonicModule, FormsModule],
+  imports: [IonicModule, FormsModule, CommonModule],
 })
 export class HomePage {
+  storedItems: any[] = [];
   key: string = '';
   value: string = '';
   output: string = '';
 
-  constructor(private storageService: StorageService) {}
+  constructor(private storageService: StorageService, private router: Router) {}
+
+  goToMovies() {
+    this.router.navigate(['/movies']);
+  }
 
   async setItem() {
     try {
