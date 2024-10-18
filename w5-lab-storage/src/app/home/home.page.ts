@@ -38,4 +38,57 @@ export class HomePage {
       this.output = `Error getting item: ${error}`;
     }
   }
+
+  async removeItem() {
+    try {
+      await this.storage.remove(this.key);
+      this.output = `Removed ${this.key}`;
+    } catch (error) {
+      console.error('Error removing item', error);
+      this.output = `Error removing item: ${error}`;
+    }
+  }
+
+  async clearStorage() {
+    try {
+      await this.storage.clear();
+      this.output = 'Storage cleared';
+    } catch (error) {
+      console.error('Error clearing storage', error);
+      this.output = `Error clearing storage: ${error}`;
+    }
+  }
+
+  async getKeys() {
+    try {
+      const keys = await this.storage.keys();
+      this.output = `Keys: ${keys.join(', ')}`;
+    } catch (error) {
+      console.error('Error getting keys', error);
+      this.output = `Error getting keys: ${error}`;
+    }
+  }
+
+  async getLength() {
+    try {
+      const length = await this.storage.length();
+      this.output = `Storage length: ${length}`;
+    } catch (error) {
+      console.error('Error getting storage length', error);
+      this.output = `Error getting storage length: ${error}`;
+    }
+  }
+
+  async iterateStorage() {
+    try {
+      let items = '';
+      await this.storage.forEach((value, key, index) => {
+        items += `${index}: ${key} = ${value}\n`;
+      });
+      this.output = `Storage items:\n${items}`;
+    } catch (error) {
+      console.error('Error iterating over storage items', error);
+      this.output = `Error iterating over storage items: ${error}`;
+    }
+  }
 }
